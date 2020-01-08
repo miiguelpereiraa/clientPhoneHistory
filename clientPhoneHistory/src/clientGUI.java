@@ -2,34 +2,36 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.Security;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextPane;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author MisterZii
  */
 public class clientGUI extends javax.swing.JFrame {
 
-    ServerSocket server;
-    
+    String loggedUser;
+    String loggedPassHash;
+
     /**
      * Creates new form clientGUI
      */
-    public clientGUI() throws IOException {
-        server = new ServerSocket(10020);
+    public clientGUI() throws IOException, NoSuchAlgorithmException {
         initComponents();
+        Security.addProvider(new BouncyCastleProvider());
     }
 
     /**
@@ -45,13 +47,19 @@ public class clientGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
-        txtUserLog = new javax.swing.JTextField();
-        txtPassLog = new javax.swing.JPasswordField();
+        txtUserLogin = new javax.swing.JTextField();
+        txtPassLogin = new javax.swing.JPasswordField();
         btLogin = new javax.swing.JButton();
+        txtIP = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtPort = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         txtUserReg = new javax.swing.JTextField();
         txtPassReg = new javax.swing.JPasswordField();
         btRegistar = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txtLogReg = new javax.swing.JTextPane();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel9 = new javax.swing.JPanel();
@@ -73,26 +81,44 @@ public class clientGUI extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         txtDesc = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
-        txtBlockchain = new javax.swing.JTextPane();
+        txtBlockchainIRegisto = new javax.swing.JTextPane();
         txtMinAnim = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtLog = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        txtLogIRegisto = new javax.swing.JTextPane();
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtGImei = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtResult = new javax.swing.JTextArea();
         btPesquisar = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txtLogConsult = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtLogConsult = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txtUserLog.setText("username");
+        txtUserLogin.setText("username");
 
-        txtPassLog.setText("jPasswordField1");
+        txtPassLogin.setText("jPasswordField1");
 
         btLogin.setText("Login");
+        btLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLoginActionPerformed(evt);
+            }
+        });
+
+        txtIP.setText("192.168.1.122");
+        txtIP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIPActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Endereço IP");
+
+        jLabel4.setText("Porto");
+
+        txtPort.setText("10020");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -101,21 +127,33 @@ public class clientGUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtPassLog)
-                    .addComponent(txtUserLog)
-                    .addComponent(btLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(735, Short.MAX_VALUE))
+                    .addComponent(txtPassLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(txtUserLogin)
+                    .addComponent(btLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtIP)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(txtPort))
+                .addContainerGap(691, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtUserLog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPassLog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPassLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btLogin)
-                .addContainerGap(316, Short.MAX_VALUE))
+                .addGap(8, 8, 8)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(200, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Login", jPanel3);
@@ -131,17 +169,22 @@ public class clientGUI extends javax.swing.JFrame {
             }
         });
 
+        txtLogReg.setBorder(javax.swing.BorderFactory.createTitledBorder("Log"));
+        jScrollPane5.setViewportView(txtLogReg);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtPassReg)
-                    .addComponent(txtUserReg)
-                    .addComponent(btRegistar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(735, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtPassReg)
+                        .addComponent(txtUserReg)
+                        .addComponent(btRegistar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +195,9 @@ public class clientGUI extends javax.swing.JFrame {
                 .addComponent(txtPassReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btRegistar)
-                .addContainerGap(316, Short.MAX_VALUE))
+                .addGap(96, 96, 96)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Registo", jPanel4);
@@ -224,11 +269,9 @@ public class clientGUI extends javax.swing.JFrame {
 
         txtDesc.setText("Teste");
 
-        jScrollPane4.setViewportView(txtBlockchain);
+        jScrollPane4.setViewportView(txtBlockchainIRegisto);
 
-        txtLog.setColumns(20);
-        txtLog.setRows(5);
-        jScrollPane1.setViewportView(txtLog);
+        jScrollPane6.setViewportView(txtLogIRegisto);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -266,7 +309,7 @@ public class clientGUI extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
@@ -312,16 +355,16 @@ public class clientGUI extends javax.swing.JFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(txtMinAnim, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addContainerGap(15, Short.MAX_VALUE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane6)
+                        .addContainerGap())))
         );
 
         jTabbedPane3.addTab("Inserir Registo", jPanel9);
 
-        jLabel2.setText("Introduza o imei do equipamento que deseja pesquisar:");
+        jLabel2.setText("Introduza o IMEI do equipamento que deseja pesquisar:");
 
         txtResult.setColumns(20);
         txtResult.setRows(5);
@@ -334,9 +377,7 @@ public class clientGUI extends javax.swing.JFrame {
             }
         });
 
-        txtLogConsult.setColumns(20);
-        txtLogConsult.setRows(5);
-        jScrollPane3.setViewportView(txtLogConsult);
+        jScrollPane1.setViewportView(txtLogConsult);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -351,8 +392,8 @@ public class clientGUI extends javax.swing.JFrame {
                     .addComponent(btPesquisar))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3))
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -368,8 +409,8 @@ public class clientGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btPesquisar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane3.addTab("Consultar", jPanel6);
@@ -402,16 +443,43 @@ public class clientGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistarActionPerformed
+        String ip = txtIP.getText();
+        int port = Integer.parseInt(txtPort.getText());
         try {
-            //Criação da hash para o user+password
-            String aux = txtUserReg.getText()+txtPassReg.getPassword();
             MessageDigest hasher = MessageDigest.getInstance("SHA3-256");
-            byte[] h = hasher.digest(aux.getBytes());
-            String txtH = Base64.getEncoder().encodeToString(h);
-            
-            ServerSocket listener;
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(clientGUI.class.getName()).log(Level.SEVERE, null, ex);
+
+            //Obter a hash do username e da password
+            String user = txtUserReg.getText();
+            String pass = new String(txtPassReg.getPassword());
+
+            //byte[] hUser = hasher.digest(user.getBytes());
+            byte[] hPass = hasher.digest(pass.getBytes());
+            //String hashUser = Base64.getEncoder().encodeToString(hUser);
+            String hashPass = Base64.getEncoder().encodeToString(hPass);
+
+            String aux = "registo " + user + " " + hashPass;
+            String send = Base64.getEncoder().encodeToString(aux.getBytes());
+
+            //Abre o socket
+            Socket client = new Socket(ip, port);
+            //Abre as streams IO
+            DataInputStream in = new DataInputStream(client.getInputStream());
+            DataOutputStream out = new DataOutputStream(client.getOutputStream());
+            //Envia a informação
+            out.writeUTF(send);
+            out.flush();
+            //Recebe a resposta
+            String resposta = in.readUTF();
+
+            displayLog(txtLogReg, "Registo", resposta);
+
+            //Fecha as streams
+            in.close();
+            out.close();
+            client.close();
+
+        } catch (Exception ex) {
+            displayException(txtLogReg, "Registo", ex);
         }
     }//GEN-LAST:event_btRegistarActionPerformed
 
@@ -420,36 +488,46 @@ public class clientGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtImeiActionPerformed
 
     private void btAddRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddRegActionPerformed
-        try {
-            String aux = "addreg " + txtImei.getText()+" "+
-                    txtDesc.getText()+" "+
-                    txtMarca.getText()+" "+
-                    txtModelo.getText()+" "+
-                    txtPais.getText()+" "+
-                    txtRede.getText()+" "+
-                    txtRep.getText()+" "+
-                    txtMat.getText();
-            //byte[] b = Base64.getEncoder().encode(aux.getBytes());
-            String send = Base64.getEncoder().encodeToString(aux.getBytes());
-            //Abre o socket
-            Socket client = new Socket("192.168.1.123", 10020);
-            //Abre as streams IO
-            DataInputStream in = new DataInputStream(client.getInputStream());
-            DataOutputStream out = new DataOutputStream(client.getOutputStream());
-            //Envia a informação
-            //out.write(b);
-            out.writeUTF(send);
-            out.flush();
-            //Recebe a resposta
-            String resposta = in.readUTF();
-            displayMessage("Adicionar Registo", resposta);
-            //Fecha as streams
-            in.close();
-            out.close();
-            client.close();
-        } catch (IOException ex) {
-            Logger.getLogger(clientGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String ip = txtIP.getText();
+        int port = Integer.parseInt(txtPort.getText());
+        btAddReg.setEnabled(false);
+        new Thread(
+                () -> {
+                    try {
+                        String aux = "addreg "
+                        + this.loggedUser + " "
+                        + this.loggedPassHash + " "
+                        + txtImei.getText() + " "
+                        + txtDesc.getText() + " "
+                        + txtMarca.getText() + " "
+                        + txtModelo.getText() + " "
+                        + txtPais.getText() + " "
+                        + txtRede.getText() + " "
+                        + txtRep.getText() + " "
+                        + txtMat.getText();
+                        //byte[] b = Base64.getEncoder().encode(aux.getBytes());
+                        String send = Base64.getEncoder().encodeToString(aux.getBytes());
+                        //Abre o socket
+                        Socket client = new Socket(ip, port);
+                        //Abre as streams IO
+                        DataInputStream in = new DataInputStream(client.getInputStream());
+                        DataOutputStream out = new DataOutputStream(client.getOutputStream());
+                        //Envia a informação
+                        //out.write(b);
+                        out.writeUTF(send);
+                        out.flush();
+                        //Recebe a resposta
+                        String resposta = in.readUTF();
+                        displayLog(txtLogIRegisto, "Adicionar Registo", resposta);
+                        //Fecha as streams
+                        in.close();
+                        out.close();
+                        client.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(clientGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }).start();
+        btAddReg.setEnabled(true);
     }//GEN-LAST:event_btAddRegActionPerformed
 
     private void txtMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMarcaActionPerformed
@@ -461,11 +539,13 @@ public class clientGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRedeActionPerformed
 
     private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
+        String ip = txtIP.getText();
+        int port = Integer.parseInt(txtPort.getText());
         try {
             String aux = "pesquisar " + txtGImei.getText();
             String send = Base64.getEncoder().encodeToString(aux.getBytes());
             //Abre o socket
-            Socket client = new Socket("192.168.1.123", 10020);
+            Socket client = new Socket(ip, port);
             //Abre as streams IO
             DataInputStream in = new DataInputStream(client.getInputStream());
             DataOutputStream out = new DataOutputStream(client.getOutputStream());
@@ -474,12 +554,12 @@ public class clientGUI extends javax.swing.JFrame {
             out.flush();
             //Recebe a resposta
             String resposta = in.readUTF();
-            if(resposta == null)
+            if (resposta == null) {
                 displayMessageConsult("Pesquisa", "Não há resultados para o imei introduzido");
-            else{
+            } else {
                 String[] result = resposta.split(";");
                 for (String string : result) {
-                    txtResult.setText(string+"\n\n");
+                    txtResult.setText(string + "\n\n");
                 }
             }
             //Fecha as streams
@@ -490,6 +570,54 @@ public class clientGUI extends javax.swing.JFrame {
             Logger.getLogger(clientGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btPesquisarActionPerformed
+
+    private void txtIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIPActionPerformed
+
+    private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
+        String ip = txtIP.getText();
+        int port = Integer.parseInt(txtPort.getText());
+        try {
+            MessageDigest hasher = MessageDigest.getInstance("SHA3-256");
+
+            //Obter a hash do username e da password
+            String user = txtUserLogin.getText();
+            String pass = new String(txtPassLogin.getPassword());
+
+            //byte[] hUser = hasher.digest(user.getBytes());
+            byte[] hPass = hasher.digest(pass.getBytes());
+            //String hashUser = Base64.getEncoder().encodeToString(hUser);
+            String hashPass = Base64.getEncoder().encodeToString(hPass);
+
+            String aux = "login " + user + " " + hashPass;
+            String send = Base64.getEncoder().encodeToString(aux.getBytes());
+
+            //Abre o socket
+            Socket client = new Socket(ip, port);
+            //Abre as streams IO
+            DataInputStream in = new DataInputStream(client.getInputStream());
+            DataOutputStream out = new DataOutputStream(client.getOutputStream());
+            //Envia a informação
+            out.writeUTF(send);
+            out.flush();
+            //Recebe a resposta
+            String resposta = in.readUTF();
+            //Guarda o utilizador actual
+            this.loggedUser = user;
+            this.loggedPassHash = hashPass;
+
+            displayLog(txtLogReg, "Registo", resposta);
+
+            //Fecha as streams
+            in.close();
+            out.close();
+            client.close();
+
+        } catch (Exception ex) {
+            displayException(txtLogReg, "Registo", ex);
+        }
+    }//GEN-LAST:event_btLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -525,6 +653,8 @@ public class clientGUI extends javax.swing.JFrame {
                     new clientGUI().setVisible(true);
                 } catch (IOException ex) {
                     Logger.getLogger(clientGUI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(clientGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -541,6 +671,8 @@ public class clientGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -552,37 +684,48 @@ public class clientGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTextPane txtBlockchain;
+    private javax.swing.JTextPane txtBlockchainIRegisto;
     private javax.swing.JTextField txtDesc;
     private javax.swing.JTextField txtGImei;
+    private javax.swing.JTextField txtIP;
     private javax.swing.JTextField txtImei;
-    private javax.swing.JTextArea txtLog;
-    private javax.swing.JTextArea txtLogConsult;
+    private javax.swing.JTextPane txtLogConsult;
+    private javax.swing.JTextPane txtLogIRegisto;
+    private javax.swing.JTextPane txtLogReg;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtMat;
     private javax.swing.JLabel txtMinAnim;
     private javax.swing.JTextField txtModelo;
     private javax.swing.JTextField txtPais;
-    private javax.swing.JPasswordField txtPassLog;
+    private javax.swing.JPasswordField txtPassLogin;
     private javax.swing.JPasswordField txtPassReg;
+    private javax.swing.JTextField txtPort;
     private javax.swing.JTextField txtRede;
     private javax.swing.JTextField txtRep;
     private javax.swing.JTextArea txtResult;
-    private javax.swing.JTextField txtUserLog;
+    private javax.swing.JTextField txtUserLogin;
     private javax.swing.JTextField txtUserReg;
     // End of variables declaration//GEN-END:variables
 
-    public void displayMessage(String source, String txt) {
-        txtLog.setText(
-                source + "\t" + txt + "\n" + txtLog.getText()
+    public void displayLog(JTextPane comp, String source, String txt) {
+        comp.setText(
+                source + "\t" + txt + "\n" + comp.getText()
         );
     }
-    
+
+    public void displayException(JTextPane comp, String source, Exception ex) {
+        comp.setText(
+                source + "\t" + ex.getMessage() + "\n" + comp.getText()
+        );
+        Logger.getLogger(clientGUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
     public void displayMessageConsult(String source, String txt) {
         txtLogConsult.setText(
                 source + "\t" + txt + "\n" + txtLogConsult.getText()
