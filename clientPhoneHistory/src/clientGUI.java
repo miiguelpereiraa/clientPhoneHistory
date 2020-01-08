@@ -523,11 +523,11 @@ public class clientGUI extends javax.swing.JFrame {
                         in.close();
                         out.close();
                         client.close();
+                        btAddReg.setEnabled(true);
                     } catch (IOException ex) {
                         Logger.getLogger(clientGUI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }).start();
-        btAddReg.setEnabled(true);
     }//GEN-LAST:event_btAddRegActionPerformed
 
     private void txtMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMarcaActionPerformed
