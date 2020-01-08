@@ -6,9 +6,11 @@ import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -32,6 +34,7 @@ public class clientGUI extends javax.swing.JFrame {
     public clientGUI() throws IOException, NoSuchAlgorithmException {
         initComponents();
         Security.addProvider(new BouncyCastleProvider());
+        jTPane.remove(jPServ);
     }
 
     /**
@@ -43,10 +46,10 @@ public class clientGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
+        jTPane = new javax.swing.JTabbedPane();
+        jPAut = new javax.swing.JPanel();
+        jTPAut = new javax.swing.JTabbedPane();
+        jPLogin = new javax.swing.JPanel();
         txtUserLogin = new javax.swing.JTextField();
         txtPassLogin = new javax.swing.JPasswordField();
         btLogin = new javax.swing.JButton();
@@ -54,15 +57,19 @@ public class clientGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtPort = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jPReg = new javax.swing.JPanel();
         txtUserReg = new javax.swing.JTextField();
         txtPassReg = new javax.swing.JPasswordField();
         btRegistar = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         txtLogReg = new javax.swing.JTextPane();
-        jPanel2 = new javax.swing.JPanel();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
-        jPanel9 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jPServ = new javax.swing.JPanel();
+        jTPServ = new javax.swing.JTabbedPane();
+        jPIReg = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtImei = new javax.swing.JTextField();
         btAddReg = new javax.swing.JButton();
@@ -80,12 +87,10 @@ public class clientGUI extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtDesc = new javax.swing.JTextField();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        txtBlockchainIRegisto = new javax.swing.JTextPane();
         txtMinAnim = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         txtLogIRegisto = new javax.swing.JTextPane();
-        jPanel6 = new javax.swing.JPanel();
+        jPConsult = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtGImei = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -95,10 +100,6 @@ public class clientGUI extends javax.swing.JFrame {
         txtLogConsult = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        txtUserLogin.setText("username");
-
-        txtPassLogin.setText("jPasswordField1");
 
         btLogin.setText("Login");
         btLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -114,49 +115,62 @@ public class clientGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Endereço IP");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Porto");
 
         txtPort.setText("10020");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtPassLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(txtUserLogin)
-                    .addComponent(btLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtIP)
-                    .addComponent(jLabel3)
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setText("Username:");
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setText("Password:");
+
+        javax.swing.GroupLayout jPLoginLayout = new javax.swing.GroupLayout(jPLogin);
+        jPLogin.setLayout(jPLoginLayout);
+        jPLoginLayout.setHorizontalGroup(
+            jPLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPLoginLayout.createSequentialGroup()
+                .addGap(255, 255, 255)
+                .addGroup(jPLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(txtPort)
                     .addComponent(jLabel4)
-                    .addComponent(txtPort))
-                .addContainerGap(691, Short.MAX_VALUE))
+                    .addComponent(txtIP, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(btLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPassLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                    .addComponent(txtUserLogin)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel15))
+                .addContainerGap(317, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+        jPLoginLayout.setVerticalGroup(
+            jPLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPLoginLayout.createSequentialGroup()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPassLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btLogin)
                 .addGap(8, 8, 8)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Login", jPanel3);
+        jTPAut.addTab("Login", jPLogin);
 
         txtUserReg.setText("username");
 
@@ -172,52 +186,67 @@ public class clientGUI extends javax.swing.JFrame {
         txtLogReg.setBorder(javax.swing.BorderFactory.createTitledBorder("Log"));
         jScrollPane5.setViewportView(txtLogReg);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtPassReg)
-                        .addComponent(txtUserReg)
-                        .addComponent(btRegistar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(278, Short.MAX_VALUE))
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setText("Username:");
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel14.setText("Password:");
+
+        javax.swing.GroupLayout jPRegLayout = new javax.swing.GroupLayout(jPReg);
+        jPReg.setLayout(jPRegLayout);
+        jPRegLayout.setHorizontalGroup(
+            jPRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPRegLayout.createSequentialGroup()
+                .addGroup(jPRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPRegLayout.createSequentialGroup()
+                        .addGap(300, 300, 300)
+                        .addGroup(jPRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(btRegistar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPassReg, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14)
+                            .addComponent(txtUserReg, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)))
+                    .addGroup(jPRegLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 861, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+        jPRegLayout.setVerticalGroup(
+            jPRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPRegLayout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addComponent(jLabel6)
+                .addGap(7, 7, 7)
                 .addComponent(txtUserReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPassReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel14)
+                .addGap(7, 7, 7)
+                .addComponent(txtPassReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
                 .addComponent(btRegistar)
-                .addGap(96, 96, 96)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jTabbedPane2.addTab("Registo", jPanel4);
+        jTPAut.addTab("Registo", jPReg);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+        javax.swing.GroupLayout jPAutLayout = new javax.swing.GroupLayout(jPAut);
+        jPAut.setLayout(jPAutLayout);
+        jPAutLayout.setHorizontalGroup(
+            jPAutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTPAut)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+        jPAutLayout.setVerticalGroup(
+            jPAutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTPAut)
         );
 
-        jTabbedPane1.addTab("Autenticação", jPanel1);
+        jTPane.addTab("Autenticação", jPAut);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("IMEI:");
 
-        txtImei.setText("Teste");
         txtImei.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtImeiActionPerformed(evt);
@@ -231,59 +260,53 @@ public class clientGUI extends javax.swing.JFrame {
             }
         });
 
-        txtMarca.setText("Teste");
         txtMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMarcaActionPerformed(evt);
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("Marca:");
 
-        txtModelo.setText("Teste");
-
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setText("Modelo:");
 
-        txtRede.setText("Teste");
         txtRede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRedeActionPerformed(evt);
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setText("Rede:");
 
-        txtPais.setText("Teste");
-
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("País:");
 
-        txtRep.setText("Teste");
-
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("Reparação:");
 
-        txtMat.setText("Teste");
-
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Material:");
 
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel13.setText("Descrição");
 
-        txtDesc.setText("Teste");
-
-        jScrollPane4.setViewportView(txtBlockchainIRegisto);
-
+        txtLogIRegisto.setBorder(javax.swing.BorderFactory.createTitledBorder("Log"));
         jScrollPane6.setViewportView(txtLogIRegisto);
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPIRegLayout = new javax.swing.GroupLayout(jPIReg);
+        jPIReg.setLayout(jPIRegLayout);
+        jPIRegLayout.setHorizontalGroup(
+            jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPIRegLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPIRegLayout.createSequentialGroup()
+                        .addGroup(jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPIRegLayout.createSequentialGroup()
+                                .addGroup(jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel11)
                                     .addComponent(jLabel10)
                                     .addComponent(jLabel12)
@@ -292,9 +315,9 @@ public class clientGUI extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel1))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtImei, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtMarca, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                                         .addComponent(txtModelo)
                                         .addComponent(txtRede)
@@ -304,65 +327,57 @@ public class clientGUI extends javax.swing.JFrame {
                                         .addComponent(txtDesc))))
                             .addComponent(jLabel13))
                         .addGap(22, 22, 22)
-                        .addComponent(btAddReg))
+                        .addComponent(btAddReg)
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtMinAnim))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
-                    .addComponent(jScrollPane6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        jPIRegLayout.setVerticalGroup(
+            jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPIRegLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPIRegLayout.createSequentialGroup()
+                        .addGroup(jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtImei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addComponent(btAddReg))
                         .addGap(7, 7, 7)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(txtRede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(txtPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(txtRep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
                             .addComponent(txtMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPIRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13)))
-                    .addComponent(jScrollPane4))
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(txtMinAnim, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(15, Short.MAX_VALUE))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane6)
-                        .addContainerGap())))
+                    .addComponent(jScrollPane6))
+                .addGap(35, 35, 35)
+                .addComponent(txtMinAnim, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane3.addTab("Inserir Registo", jPanel9);
+        jTPServ.addTab("Inserir Registo", jPIReg);
 
         jLabel2.setText("Introduza o IMEI do equipamento que deseja pesquisar:");
 
@@ -379,109 +394,74 @@ public class clientGUI extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(txtLogConsult);
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtGImei))
-                    .addComponent(btPesquisar))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPConsultLayout = new javax.swing.GroupLayout(jPConsult);
+        jPConsult.setLayout(jPConsultLayout);
+        jPConsultLayout.setHorizontalGroup(
+            jPConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPConsultLayout.createSequentialGroup()
+                .addGroup(jPConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPConsultLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                            .addGroup(jPConsultLayout.createSequentialGroup()
+                                .addGroup(jPConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtGImei))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(jPConsultLayout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(btPesquisar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        jPConsultLayout.setVerticalGroup(
+            jPConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPConsultLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPConsultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGroup(jPConsultLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtGImei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btPesquisar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btPesquisar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1)))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
-        jTabbedPane3.addTab("Consultar", jPanel6);
+        jTPServ.addTab("Consultar", jPConsult);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane3)
+        javax.swing.GroupLayout jPServLayout = new javax.swing.GroupLayout(jPServ);
+        jPServ.setLayout(jPServLayout);
+        jPServLayout.setHorizontalGroup(
+            jPServLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTPServ)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane3)
+        jPServLayout.setVerticalGroup(
+            jPServLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTPServ)
         );
 
-        jTabbedPane1.addTab("Serviço", jPanel2);
+        jTPane.addTab("Serviço", jPServ);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTPane)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistarActionPerformed
-        String ip = txtIP.getText();
-        int port = Integer.parseInt(txtPort.getText());
-        try {
-            MessageDigest hasher = MessageDigest.getInstance("SHA3-256");
-
-            //Obter a hash do username e da password
-            String user = txtUserReg.getText();
-            String pass = new String(txtPassReg.getPassword());
-
-            //byte[] hUser = hasher.digest(user.getBytes());
-            byte[] hPass = hasher.digest(pass.getBytes());
-            //String hashUser = Base64.getEncoder().encodeToString(hUser);
-            String hashPass = Base64.getEncoder().encodeToString(hPass);
-
-            String aux = "registo " + user + " " + hashPass;
-            String send = Base64.getEncoder().encodeToString(aux.getBytes());
-
-            //Abre o socket
-            Socket client = new Socket(ip, port);
-            //Abre as streams IO
-            DataInputStream in = new DataInputStream(client.getInputStream());
-            DataOutputStream out = new DataOutputStream(client.getOutputStream());
-            //Envia a informação
-            out.writeUTF(send);
-            out.flush();
-            //Recebe a resposta
-            String resposta = in.readUTF();
-
-            displayLog(txtLogReg, "Registo", resposta);
-
-            //Fecha as streams
-            in.close();
-            out.close();
-            client.close();
-
-        } catch (Exception ex) {
-            displayException(txtLogReg, "Registo", ex);
-        }
-    }//GEN-LAST:event_btRegistarActionPerformed
 
     private void txtImeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImeiActionPerformed
         // TODO add your handling code here:
@@ -490,8 +470,8 @@ public class clientGUI extends javax.swing.JFrame {
     private void btAddRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddRegActionPerformed
         String ip = txtIP.getText();
         int port = Integer.parseInt(txtPort.getText());
-        btAddReg.setEnabled(false);
-        new Thread(
+        if(validateInput() == ""){
+            new Thread(
                 () -> {
                     try {
                         String aux = "addreg "
@@ -505,7 +485,7 @@ public class clientGUI extends javax.swing.JFrame {
                         + txtRede.getText() + " "
                         + txtRep.getText() + " "
                         + txtMat.getText();
-                        //byte[] b = Base64.getEncoder().encode(aux.getBytes());
+
                         String send = Base64.getEncoder().encodeToString(aux.getBytes());
                         //Abre o socket
                         Socket client = new Socket(ip, port);
@@ -513,21 +493,26 @@ public class clientGUI extends javax.swing.JFrame {
                         DataInputStream in = new DataInputStream(client.getInputStream());
                         DataOutputStream out = new DataOutputStream(client.getOutputStream());
                         //Envia a informação
-                        //out.write(b);
+
+                        Thread.sleep(1000);
                         out.writeUTF(send);
                         out.flush();
                         //Recebe a resposta
                         String resposta = in.readUTF();
-                        displayLog(txtLogIRegisto, "Adicionar Registo", resposta);
                         //Fecha as streams
                         in.close();
                         out.close();
                         client.close();
-                        btAddReg.setEnabled(true);
+                        displayLog(txtLogIRegisto, "Adicionar Registo", resposta);
                     } catch (IOException ex) {
                         Logger.getLogger(clientGUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    } catch (InterruptedException ex) {
+                    Logger.getLogger(clientGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 }).start();
+        }else
+            displayLog(txtLogIRegisto, "Adicionar Registo", "P.f preencha todos os campos.");
+        
     }//GEN-LAST:event_btAddRegActionPerformed
 
     private void txtMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMarcaActionPerformed
@@ -541,34 +526,53 @@ public class clientGUI extends javax.swing.JFrame {
     private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
         String ip = txtIP.getText();
         int port = Integer.parseInt(txtPort.getText());
-        try {
-            String aux = "pesquisar " + txtGImei.getText();
-            String send = Base64.getEncoder().encodeToString(aux.getBytes());
-            //Abre o socket
-            Socket client = new Socket(ip, port);
-            //Abre as streams IO
-            DataInputStream in = new DataInputStream(client.getInputStream());
-            DataOutputStream out = new DataOutputStream(client.getOutputStream());
-            //Envia a informação
-            out.writeUTF(send);
-            out.flush();
-            //Recebe a resposta
-            String resposta = in.readUTF();
-            if (resposta == null) {
-                displayMessageConsult("Pesquisa", "Não há resultados para o imei introduzido");
-            } else {
-                String[] result = resposta.split(";");
-                for (String string : result) {
-                    txtResult.setText(string + "\n\n");
-                }
-            }
-            //Fecha as streams
-            in.close();
-            out.close();
-            client.close();
-        } catch (IOException ex) {
-            Logger.getLogger(clientGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        new Thread(
+                () -> {
+                    try {
+                        String aux = "pesquisar " + this.loggedUser + " " + txtGImei.getText();
+                        String send = Base64.getEncoder().encodeToString(aux.getBytes());
+                        //Abre o socket
+                        Socket client = new Socket(ip, port);
+                        //Abre as streams IO
+                        DataInputStream in = new DataInputStream(client.getInputStream());
+                        DataOutputStream out = new DataOutputStream(client.getOutputStream());
+                        //Envia a informação
+                        out.writeUTF(send);
+                        out.flush();
+                        //Recebe a resposta
+                        String resposta = in.readUTF();
+                        if (resposta == "") {
+                            displayLog(txtLogConsult, "Pesquisa", "Não há resultados para o imei introduzido");
+                        } else {
+                            String[] result = resposta.split(";");
+                            for (String string : result) {
+                                String[] campos = string.split("#");
+                                String strFormated = "\nIMEI: " + campos[0]
+                                + "\nMarca: " + campos[1]
+                                + "\nModelo: " + campos[2]
+                                + "\nRede: " + campos[3]
+                                + "\nPaís: " + campos[4]
+                                + "\nReparação: " + campos[5]
+                                + "\nMaterial: " + campos[6]
+                                + "\nDescrição: " + campos[7];
+                                txtResult.setText(strFormated
+                                        + "\n\n"
+                                        + "--------------------------------"
+                                        + "\n\n"
+                                );
+                            }
+
+                        }
+                        //Fecha as streams
+                        in.close();
+                        out.close();
+                        client.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(clientGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }).start();
+
     }//GEN-LAST:event_btPesquisarActionPerformed
 
     private void txtIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIPActionPerformed
@@ -585,9 +589,7 @@ public class clientGUI extends javax.swing.JFrame {
             String user = txtUserLogin.getText();
             String pass = new String(txtPassLogin.getPassword());
 
-            //byte[] hUser = hasher.digest(user.getBytes());
             byte[] hPass = hasher.digest(pass.getBytes());
-            //String hashUser = Base64.getEncoder().encodeToString(hUser);
             String hashPass = Base64.getEncoder().encodeToString(hPass);
 
             String aux = "login " + user + " " + hashPass;
@@ -617,7 +619,49 @@ public class clientGUI extends javax.swing.JFrame {
         } catch (Exception ex) {
             displayException(txtLogReg, "Registo", ex);
         }
+        jTPane.remove(jPAut);
+        jTPane.addTab("Serviço", jPServ);
+
     }//GEN-LAST:event_btLoginActionPerformed
+
+    private void btRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistarActionPerformed
+        String ip = txtIP.getText();
+        int port = Integer.parseInt(txtPort.getText());
+        try {
+            MessageDigest hasher = MessageDigest.getInstance("SHA3-256");
+
+            //Obter a hash do username e da password
+            String user = txtUserReg.getText();
+            String pass = new String(txtPassReg.getPassword());
+
+            byte[] hPass = hasher.digest(pass.getBytes());
+            String hashPass = Base64.getEncoder().encodeToString(hPass);
+
+            String aux = "registo " + user + " " + hashPass;
+            String send = Base64.getEncoder().encodeToString(aux.getBytes());
+
+            //Abre o socket
+            Socket client = new Socket(ip, port);
+            //Abre as streams IO
+            DataInputStream in = new DataInputStream(client.getInputStream());
+            DataOutputStream out = new DataOutputStream(client.getOutputStream());
+            //Envia a informação
+            out.writeUTF(send);
+            out.flush();
+            //Recebe a resposta
+            String resposta = in.readUTF();
+
+            displayLog(txtLogReg, "Registo", resposta);
+
+            //Fecha as streams
+            in.close();
+            out.close();
+            client.close();
+
+        } catch (Exception ex) {
+            displayException(txtLogReg, "Registo", ex);
+        }
+    }//GEN-LAST:event_btRegistarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -670,27 +714,29 @@ public class clientGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPAut;
+    private javax.swing.JPanel jPConsult;
+    private javax.swing.JPanel jPIReg;
+    private javax.swing.JPanel jPLogin;
+    private javax.swing.JPanel jPReg;
+    private javax.swing.JPanel jPServ;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTextPane txtBlockchainIRegisto;
+    private javax.swing.JTabbedPane jTPAut;
+    private javax.swing.JTabbedPane jTPServ;
+    private javax.swing.JTabbedPane jTPane;
     private javax.swing.JTextField txtDesc;
     private javax.swing.JTextField txtGImei;
     private javax.swing.JTextField txtIP;
@@ -725,11 +771,22 @@ public class clientGUI extends javax.swing.JFrame {
         );
         Logger.getLogger(clientGUI.class.getName()).log(Level.SEVERE, null, ex);
     }
-
-    public void displayMessageConsult(String source, String txt) {
-        txtLogConsult.setText(
-                source + "\t" + txt + "\n" + txtLogConsult.getText()
-        );
+    
+    public String validateInput(){
+        ArrayList<JTextField> comp = new ArrayList<>();
+        comp.add(txtImei);
+        comp.add(txtDesc);
+        comp.add(txtMarca);
+        comp.add(txtModelo);
+        comp.add(txtPais);
+        comp.add(txtRede);
+        comp.add(txtRep);
+        comp.add(txtMat);
+        for (JTextField field : comp) {
+            if(field.getText() == "")
+                return "P.f preencha todos os campos.";
+        }
+        return "";
     }
 
 }
