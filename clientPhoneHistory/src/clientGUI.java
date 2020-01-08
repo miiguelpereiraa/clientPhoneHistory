@@ -172,8 +172,6 @@ public class clientGUI extends javax.swing.JFrame {
 
         jTPAut.addTab("Login", jPLogin);
 
-        txtUserReg.setText("username");
-
         txtPassReg.setText("jPasswordField1");
 
         btRegistar.setText("Registar");

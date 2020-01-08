@@ -232,9 +232,6 @@
                   </Layout>
                   <SubComponents>
                     <Component class="javax.swing.JTextField" name="txtUserReg">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="username"/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JPasswordField" name="txtPassReg">
                       <Properties>
